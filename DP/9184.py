@@ -1,17 +1,20 @@
-a = int(input())
-b = int(input())
-c = int(input())
+dp = [[[0 for col in range(101)] for row in range(101)] for depth in range(101)]
+for a in range(101):
+    for b in range(101):
+        for c in range(101):
+            if a <= 50 or b <= 50 or c <= 50:
+                dp[a][b][c]=1
+            elif a > 70 or b > 70 or c > 70:
+                dp[a][b][c]=dp[70][70][70]
+            elif a < b and b < c:
+                dp[a][b][c] = dp[a][b][c-1] + dp[a][b-1][c-1] - dp[a][b-1][c]
+            else:
+                dp[a][b][c] = dp[a-1][b][c] + dp[a-1][b-1][c] + dp[a-1][b][c-1] - dp[a-1][b-1][c-1]
 
-dp = 1000 * [[],[],[])
-dp[0][0][0] = 1
-
-if a <= 0 or b <= 0 or c <= 0:
-    dp[a][b][c]
-elif a > 20 or b > 20 or c > 20:
-    return dp[20]
-elif a < b and b < c:
-    return w(a, b, c - 1) + w(a, b - 1, c - 1) - w(a, b - 1, c)
-else:
-    return w(a - 1, b, c) + w(a - 1, b - 1, c) + w(a - 1, b, c - 1) - w(a - 1, b - 1, c - 1)
-
-print(w(a,b,c))
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    while 1:
+        i,j,k = map(int,(input().split()))
+        if (i==-1 and j==-1 and k==-1):
+            break
+        print(f'w({i}, {j}, {k}) = {dp[i+50][j+50][k+50]}')
