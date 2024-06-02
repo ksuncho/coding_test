@@ -23,8 +23,8 @@ def rotandgo(x,y,d):
         newx = x + 1    
     else:
         newd = 2
-        newy = y+ 1
-    return newd, newx, newy
+        newy = y + 1
+    return newx, newy, newd
 
 def back(x,y,d):
     newx = x
@@ -60,28 +60,33 @@ if __name__ == '__main__':
     # MAP = []
     # for i in range(N):
     #     MAP.append(list(map(int,input().split())))
-    M = 4
+    M = 5
     N = 4
     A = 1
     B = 1
     d = 0
-    MAP = [[1,1,1,1],[1,0,0,1],[1,1,0,1],[1,1,1,1]]
+    #MAP = [[1,1,1,1],[1,0,0,1],[1,1,0,1],[1,1,1,1]]
+    MAP = [[1,1,1,1,1],[1,0,0,0,1],[1,1,0,0,1],[1,1,1,1,1]]
+    V = [[1,1,1,1,1],[1,0,0,0,1],[1,1,0,0,1],[1,1,1,1,1]]
   #  print(MAP)
     u_y = A
     u_x = B
     u_d = d
-    count = 1
+    count = 0
     #while True:
-    MAP[u_y][u_x] = 1
+    
     for _ in range(10):
         if ((u_x < 1)|(u_x > M-1)|(u_y <1)|(u_y > N-1)|count>10):
             break
         lx, ly, dd = lookleft(u_x,u_y,u_d)
-        if (MAP[ly][lx] == 0):
-            (u_x, u_y, u_d) = rotandgo(u_x, u_y, u_d)
-            MAP[u_y][u_x] = 1
+        if V[u_y][u_x] == 0:
+            V[u_y][u_x] = 1
             count += 1
-        elif ((MAP[u_y-1][u_x] == 1) & (MAP[u_y + 1][u_x] == 1) & (MAP[u_y][u_x -1] == 1) & (MAP[u_y][u_x + 1] == 1)):
+        elif (V[ly][lx] == 0):
+            (u_x, u_y, u_d) = rotandgo(u_x, u_y, u_d)
+            #MAP[u_y][u_x] = 1            
+        elif ((MAP[u_y-1][u_x] | V[u_y-1][u_x]) & (MAP[u_y + 1][u_x] | V[u_y + 1][u_x]) \
+            & (MAP[u_y][u_x -1] | V[u_y][u_x -1]) & (MAP[u_y][u_x + 1] | V[u_y][u_x + 1])):
             (u_x, u_y, u_d) = back(u_x, u_y, u_d)
             lx, ly, dd = lookleft(u_x,u_y,u_d)
             if MAP[ly][lx] == 1:
@@ -89,9 +94,9 @@ if __name__ == '__main__':
         else:
             u_d = rotate(u_d)
 
-        print(f'LX:{lx},LY:{ly},MAP[{lx}][{ly}]:{MAP[ly][lx]},X:{u_x},Y:{u_y},DIR:{u_d}')
+        print(f'LX:{lx},LY:{ly},V[{ly}][{lx}]:{V[ly][lx]},X:{u_x},Y:{u_y},DIR:{u_d}')
         for i in range(N):            
-            print(MAP[i])
+            print(V[i])
         
     print(count)
     # print(MAP)
