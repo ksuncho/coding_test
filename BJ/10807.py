@@ -1,4 +1,5 @@
 def countt(m,data,t):
+    
     count = 0
     if len(data) != m:
         return 0
