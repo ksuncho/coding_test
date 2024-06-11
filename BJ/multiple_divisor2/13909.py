@@ -24,12 +24,13 @@
 # 36 6
 import sys
 N = int(sys.stdin.readline().rstrip())
-window=[0]*(N+1)
-for i in range(1,N+1):
-    for j in range (i,N+1,i):
-        if window[j] == 0:
-            window[j]+=1
-        else:
-            window[j]-=1
+# Memory excess(over?)
+# window=[0]*(N+1)
+# for i in range(1,N+1):
+#     for j in range (i,N+1,i):
+#         if window[j] == 0:
+#             window[j]+=1
+#         else:
+#             window[j]-=1
 
-print(sum(window))
+print(int(N**0.5))
