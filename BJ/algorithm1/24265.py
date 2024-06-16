@@ -7,5 +7,5 @@ def MenOfPassion(A, n):
             cnt +=1
     return cnt
 n = int(input())
-print(MenOfPassion([],n))
+print(n*(n-1)//2)
 print(2)

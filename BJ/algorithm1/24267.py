@@ -8,5 +8,6 @@ def MenOfPassion(A, n):
                 cnt +=1
     return cnt
 n = int(input())
+#print(MenOfPassion([0]*(n),n))
 print(MenOfPassion([0]*(n),n))
 print(3)
