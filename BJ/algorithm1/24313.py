@@ -1,7 +1,10 @@
-a1,a2 = map(int,input().split())
+a1,a0 = map(int,input().split())
 c = int(input())
 n = int(input())
-if (a1*n+a2) == (c*n):
-    print(1)
-else:
-    print(0)
+flag = 1
+for i in range(n,101):
+    if a1*i+a0 <= c*i:
+        continue
+    else:
+        flag = 0
+print(flag)
