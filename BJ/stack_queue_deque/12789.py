@@ -8,26 +8,31 @@ import sys
 N = int(sys.stdin.readline().rstrip())
 input = [int(x) for x in (sys.stdin.readline().split())]
 stack = []
+input = list(reversed(input))
 minx = min(input)
-for i in input:
-    if len(input)==0:
-        break
-    elif len(stack)==0:
-        i = input.pop()
-    elif input[-1] < stack[-1]:
-        i = input.pop()
+x = input.pop()
+for _ in range(N):
+    if x <= minx:
+        minx = x+1
     else:
-        i = stack.pop()
-     
-    if i <= minx:
-        minx = i+1
-    elif i > minx and len(input)==0:
-        break
+        stack.append(x)
+    if len(input)!=0 and len(stack)!=0:
+        if (input[-1] <= stack[-1]):                
+            x = input.pop()                         
+        else:            
+            x = stack.pop()
+    elif len(input)==0 and len(stack)!=0:
+        if (stack[-1]):                
+            x = input.pop()                         
+        else:            
+            x = stack.pop()
+    elif len(input)!=0 and len(stack)==0:
+        pass
     else:
-        stack.append(i)
-    #print(f'i={i}, stack={stack}, input={input}')
+        break
+    print(f'i={x}, stack={stack}, input={input}')
 sorted_stack = sorted(stack,reverse=True)
-if (len(stack) == 0 and len(input) == 0) or (len(input)==0 and stack==sorted_stack):
+if (len(stack) == 0) or (stack==sorted_stack):
     print('Nice')
 else:
     print('Sad')
