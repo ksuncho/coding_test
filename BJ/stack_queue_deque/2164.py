@@ -5,13 +5,13 @@ array = [x for x in range(1,N+1)]
 queue=deque(array)
 i = 0
 while True:
-    if i!=0 and len(queue)==1:
+    if len(queue)==1:
         print(queue[0])
         break
     else:
-        x = queue.popleft()
+        x = queue.popleft()        
         if i%2==0:
-            continue
+            pass
         else:
             queue.append(x)
     i+=1
