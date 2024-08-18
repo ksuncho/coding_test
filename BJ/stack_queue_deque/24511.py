@@ -1,16 +1,20 @@
 from collections import deque
 import sys
+
 N = int(sys.stdin.readline().rstrip())
-A = [int(x) for x in sys.stdin.readline().spllit()]
-B = [int(x) for x in sys.stdin.readline().spllit()]
+A = [int(x) for x in sys.stdin.readline().split()]
+B = [int(x) for x in sys.stdin.readline().split()]
 M = int(sys.stdin.readline().rstrip())
-C = [int(x) for x in sys.stdin.readline().spllit()]
-queuestack = deque(B)
-cnt=0
+C = [int(x) for x in sys.stdin.readline().split()]
+X = deque()
+
+for i, xi in enumerate(B):
+    if A[i]==0:
+        X.append(xi)
+
 for i in C:
-    if A[cnt] == 0:
-        queuestack.popleft()
-        queuestack.append(i)
-    else:
-        queuestack.append(i)
-        cnt +=1
+    X.insert(0,i)
+    print(X.pop(),end=' ')
+
+
+    
