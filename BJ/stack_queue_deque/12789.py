@@ -11,28 +11,29 @@ stack = []
 input = list(reversed(input))
 minx = min(input)
 x = input.pop()
-for _ in range(N):
+cnt = 0
+while True:
     if x <= minx:
         minx = x+1
     else:
         stack.append(x)
-    if len(input)!=0 and len(stack)!=0:
-        if (input[-1] <= stack[-1]):                
-            x = input.pop()                         
-        else:            
-            x = stack.pop()
-    elif len(input)==0 and len(stack)!=0:
-        if (stack[-1]):                
-            x = input.pop()                         
-        else:            
-            x = stack.pop()
-    elif len(input)!=0 and len(stack)==0:
-        pass
-    else:
+    if len(input)==0 or cnt >= 2*N:
         break
-    print(f'i={x}, stack={stack}, input={input}')
+    else:
+        if len(stack)!=0:
+            if (input[-1] <= stack[-1]):                
+                x = input.pop()                         
+            else:            
+                x = stack.pop()
+        elif len(stack)==0:
+            x = input.pop()
+    cnt +=1
+        
+    #print(f'i={x}, stack={stack}, input={input}, minx={minx}')
 sorted_stack = sorted(stack,reverse=True)
-if (len(stack) == 0) or (stack==sorted_stack):
+if len(input)!=0:
+    print('Sad')    
+elif (len(stack) == 0) or (stack==sorted_stack):
     print('Nice')
 else:
     print('Sad')
