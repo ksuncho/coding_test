@@ -52,19 +52,22 @@ if len(S) >= 2:
             #!= '-') and (S[i] != '='):
                 count += 1                            
             break
-        elif (i == len(S)-3) and (S[i:i+3]=='dz='):
-            count +=1
+        elif (i == len(S)-2) and (S[i] == 'd' and S[i+1] == 'z'):
+            count +=2
             break
+        elif (i == len(S)-3) and (S[i] == 'd' and S[i+1] == 'z' and S[i+2] == '='):
+            count +=1
+            break        
         else:
-            print(i,S[i])
+            #print(i,S[i])
             if S[i] == 'c':
                 if (S[i+1] == '=') or (S[i+1] == '-'):
                     i += 2
                 else:
                     i += 1
             elif S[i] == 'd':
-                if (S[i+1:i+3] == 'z='):
-                    i += 3
+                if(S[i+1] == 'z' and S[i+2] == '='):                    
+                        i += 3
                 elif (S[i+1] == '-'):
                     i += 2
                 else:
