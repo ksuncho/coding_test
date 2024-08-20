@@ -8,8 +8,10 @@ table = [['#','#','#','#','#'],
 dx = [-1, 0, 1, 0]
 dy = [0, -1, 0, 1]
 def bfs(rx,ry,bx,by,tx,ty):
-    queue = deque([rx,ry,bx,by,0])
-    while queue:
+    queue = deque([[rx,ry,bx,by,0]])
+    cnt=0
+    while queue and cnt<=10:
+        print(queue)
         rxx, ryy, bxx, byy, d = queue.popleft()
         while True:
             nrx = rxx + dx[d]
@@ -35,7 +37,7 @@ def bfs(rx,ry,bx,by,tx,ty):
             break
         for i in range(4):
             queue.append([rxx,ryy,bxx,byy,i])
-        cnt += 1
+        cnt += 1        
     return cnt
 
 tx, ty, rx, ry, bx, by = 0, 0, 0, 0, 0, 0
