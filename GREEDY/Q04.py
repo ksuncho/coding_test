@@ -18,6 +18,6 @@ target = 1
 for i in array:
     if target < i:
         break
-    target+=i11
+    target+=i
 print(target)
 
