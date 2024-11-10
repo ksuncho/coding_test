@@ -1,7 +1,8 @@
+#https://school.programmers.co.kr/learn/courses/30/lessons/60057#
 array = str(input())
 length = len(array)
 minsize = length
-for size in range(1,length//2+1):
+for size in range(1,length+1):
     prev=''
     data=''
     cnt = 0
@@ -27,7 +28,7 @@ for size in range(1,length//2+1):
                 data=data+prev+cur            
         ccnt+=1
     csize=len(data)
-    #print(f'size={size}:data={data},ccnt={ccnt}')
+    print(f'size={size}:data={data},ccnt={ccnt}')
     if csize<=minsize:
         minsize=csize
 print(minsize)

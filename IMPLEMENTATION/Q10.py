@@ -1,3 +1,4 @@
+#https://school.programmers.co.kr/learn/courses/30/lessons/60059#
 from itertools import chain
 import copy
 def rot(key,m,dir):
