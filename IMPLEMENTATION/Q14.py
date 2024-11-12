@@ -1,55 +1,29 @@
+from itertools import permutations
 n = int(input())
 weak = list(map(int,input().split()))
 dist = list(map(int,input().split()))
 
-def cw(array, start, dist):
-    n = len(array)
-    end = (start+dist)%n
-    if start > end:
-        array[start:]=[0]*(n-start)
-        array[0:end+1]=[0]*(end+1)
-    else:
-        if end == n-1:
-            array[start:]=[0]*(end-start+1)
-        else:
-            array[start:end+1]=[0]*(end-start+1)
-    return
-
-def ccw(array, start, dist):
-    n = len(array)
-    end = (start-dist)
-    if end < 0:
-        end = end + n
-    if start < end:
-        array[end:]=[0]*(n-end)
-        array[0:start+1]=[0]*(start+1)
-    else:
-        if start == n-1:
-            array[end:]=[0]*(start-end+1)
-        else:
-            array[end:start+1]=[0]*(start-end+1)    
-    return 
-
-
-def check_zero(array):
-    for i in array:
-        if i !=0:
-            return False
-    return True
+length = len(weak)
+for i in range(length):
+    weak.append(weak[i]+n)
 
 def solution (n, weak, dist):
-    ans = 0
-    array = [1 if i in weak else 0 for i in range(n)]
-    #print(array)
-    for i in dist:
-        for j in weak:
-            cw(array,j,dist)
-            if check_zero(array):
-                break
-            ccw(array,j,dist)
-            if check_zero(array):
-                break
+    max_cnt = len(dist)+1       
+    friends = list(permutations(dist,len(dist)))
+    for start in range(length):              
+        for fr in friends:  
+            cnt = 1
+            ptr = weak[start]+fr[cnt-1]
+            for i in range(start,start+length):
+                if ptr < weak[i]:
+                    cnt+=1
+                    if cnt > len(dist):
+                        break
+                ptr = weak[i]+fr[cnt-1]
+                #print(f'start={start},dist={fr[cnt-1]},ptr={ptr},cnt={cnt}')                
+            newcnt=min(cnt,max_cnt)
+        ans=min(newcnt,max_cnt)            
     return ans
 
-solution(n, weak,dist)
-#print(solution(n, weak,dist))
+#solution(n, weak,dist)
+print(solution(n, weak,dist))
