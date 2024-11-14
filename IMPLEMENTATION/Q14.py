@@ -8,7 +8,7 @@ for i in range(length):
     weak.append(weak[i]+n)
 
 def solution (n, weak, dist):
-    max_cnt = len(dist)+1       
+    ans = len(dist)+1       
     friends = list(permutations(dist,len(dist)))
     for start in range(length):              
         for fr in friends:  
@@ -19,10 +19,10 @@ def solution (n, weak, dist):
                     cnt+=1
                     if cnt > len(dist):
                         break
-                ptr = weak[i]+fr[cnt-1]
+                    ptr = weak[i]+fr[cnt-1]
                 #print(f'start={start},dist={fr[cnt-1]},ptr={ptr},cnt={cnt}')                
-            newcnt=min(cnt,max_cnt)
-        ans=min(newcnt,max_cnt)
+            ans=min(cnt,ans)
+        #ans=min(newcnt,max_cnt)
     if ans > len(dist):
         return -1
     return ans
