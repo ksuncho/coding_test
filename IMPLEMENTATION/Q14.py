@@ -22,7 +22,9 @@ def solution (n, weak, dist):
                 ptr = weak[i]+fr[cnt-1]
                 #print(f'start={start},dist={fr[cnt-1]},ptr={ptr},cnt={cnt}')                
             newcnt=min(cnt,max_cnt)
-        ans=min(newcnt,max_cnt)            
+        ans=min(newcnt,max_cnt)
+    if ans > len(dist):
+        return -1
     return ans
 
 #solution(n, weak,dist)
