@@ -20,4 +20,4 @@ def bfs (x,visited,array):
                 return 
             else:
                 queue.popleft()
-    return
+    return 1
