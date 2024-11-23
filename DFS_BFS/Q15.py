@@ -10,31 +10,29 @@ for _ in range(m):
     array[i-1].append(j)    
     cities = cities | set((i,j))    
 #print(array)
-queue=deque()
+
 
 def bfs (array,start,end,visited):
+    queue=deque()
     queue.append(start)
     visited[start-1]=1
     cnt=0       
     while queue:
         v = queue.popleft()
         if v == end:
-            cnt+=1
             break
         for i in array[v-1]:
             if not visited[i-1]:
                 queue.append(i)
                 visited[i-1]=1
                 cnt+=1
-                print(queue)        
+                print(i,queue)     
     return cnt
 
 combi = permutations(cities,2)
-for start,end in list(combi):
-    print(start,end) 
-    if array[start-1]==[]:
-        continue
-    else:
+for start,end in list(combi):    
+    if start == x:
+        print(start,end) 
         visited = [0]*len(cities)
         count = bfs(array,start,end,visited)
         #count = sum(visited)
