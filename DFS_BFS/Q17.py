@@ -29,10 +29,11 @@ dy = [0, 1, 0, -1]
 def bfs(x,y,v,r):
     if x<0 or x>=n or y<0 or y>=n:
         return
-    queue=deque((x,y))
-    r -= 1
+    queue=deque()
+    queue.append((x,y))
     while queue:
         i = queue.popleft()
+        #print(i)
         if i[0]<0 or i[0]>=n or i[1]<0 or i[1]>=n:
             break
         if r <= 0:
@@ -42,6 +43,7 @@ def bfs(x,y,v,r):
             for k in range(4):
                 queue.append((i[0]+dx[k],i[1]+dy[k]))
             r -= 1
+    return
 
 virus = []
 for i in range(n):
@@ -56,7 +58,7 @@ for i in virus:
     bfs(i[0],i[1]+1,i[2],s)
     #print(i)
 
-for i in range(n):
-    print(array[i])
+# for i in range(n):
+#     print(array[i])
 
 print(array[x-1][y-1])
