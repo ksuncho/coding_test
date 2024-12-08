@@ -34,10 +34,10 @@ def bfs(x,y,v,r):
     while queue:
         i = queue.popleft()
         r -= 1
-        #print(i)
+        print(r,i)
         if i[0]<0 or i[0]>=n or i[1]<0 or i[1]>=n:
             break
-        if r <= 0:
+        if r < 0:
             break
         if array[i[0]][i[1]]==0:
             array[i[0]][i[1]]=v
@@ -52,14 +52,16 @@ for i in range(n):
             virus.append((i,j,array[i][j]))
 virus.sort(key=lambda x:x[2])
 #print(virus)
-#for minute in range(s,0,-1):
-for i in virus:
-    bfs(i[0],i[1]+1,i[2],s)
-    bfs(i[0],i[1]-1,i[2],s)
-    bfs(i[0]+1,i[1],i[2],s)
-    bfs(i[0]-1,i[1],i[2],s)
-    for j in range(n):
-        print(array[j])
-    print((f'------------------'))
+for _ in range(s,0,-1):
+    for i in virus:
+        for k in range(4):
+            nx = i[0]+dx[k]
+            ny = i[1]+dy[k]
+            if nx<0 or nx>=n or ny<0 or ny>=n:
+                break
+            if array[nx][ny]==0:
+                array[nx][ny]=i[2]            
+                queue.append((nx,ny))  
+
 
 print(array[x-1][y-1])
