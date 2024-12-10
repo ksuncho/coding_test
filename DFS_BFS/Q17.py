@@ -54,6 +54,7 @@ virus.sort(key=lambda x:x[2])
 #print(virus)
 for _ in range(s,0,-1):
     for i in virus:
+        queue=deque()
         for k in range(4):
             nx = i[0]+dx[k]
             ny = i[1]+dy[k]
