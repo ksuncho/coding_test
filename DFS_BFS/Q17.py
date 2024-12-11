@@ -64,5 +64,4 @@ for _ in range(s,0,-1):
                 array[nx][ny]=i[2]            
                 queue.append((nx,ny))  
 
-
 print(array[x-1][y-1])
