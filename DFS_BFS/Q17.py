@@ -21,6 +21,7 @@ def dfs(x,y,v,r):
         dfs(x,y+1,v,r-1)
         # for i in range(n):
         #     print(array[i])
+        
         return True
     return True
 dx = [1, 0, -1, 0]
