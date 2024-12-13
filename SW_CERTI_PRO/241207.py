@@ -24,3 +24,14 @@
 # 6 1000 170 139    #mID[1],mFreq[1],my[1],mx[1]
 # 3 1 3 4450        #CMD, base, #of connection, minPower
 # 현재 있는 기지국간 연결시 최소 소모전력
+
+# 전체 공간을 100개의 서브공간으로 (sqrt를 역산해서 구함 100*100=10000)으로 나누어서 addRadio가 호출되면
+# 해당되는 서브공간에 배치(vector에 저장)을 하고 이후에 getMinPower에서는 자신이 속한 서브공간에 있는 
+# 기기들을 우선순위로 파워 합산 <-- 1st for loop
+# 자신의 공간에서 mCount를 만족할 수 있으니 4방향으로 뻗어나가면서 mCount채워나가면서 검색<-- 2nd for loop
+# 두번째 loop에서 if(count_power[i-1]>=mCount) break; 가 이중 loop두이에 있는 건 바깥공간을 모두 검색한
+# 다음 체크해야만 해서임 Limit는 최대 파워값이고 이건 최소값을 찾는거라 mCount가 채워져야함
+
+# 해당 무선통신기가 속한 bucket을 1차적으로 확인한 후, 겉껍질을 차례대로 순회하는데 i번째 겉껍질에 속한 기기와
+# 통신하기위해 최소 1000*(i-1)만큼 파워가 필요하다는 사실을 이용해서 break
+# 첫번째 loop에서 if(Limit<power)조건에 의해 무조건 mCount가 채워지지 않아야
