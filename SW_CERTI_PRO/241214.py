@@ -2,12 +2,13 @@
 #재장전시간 가진 Tower, 타워 공격거리는 3
 #도망자 최대 300
 #행동주기 1-5
+#도망자는 road로만 이동가능
 #공격 준비 = 재장전시간 지남
-#마지막 공격 대상이 아직 사정거리내에 있으면 공격 대상
+#마지막 공격 대상이 아직 사정거리내에 있으면 공격 대상(mHP-1), tower는 0인 땅에만 지을 수 있음
 #   1) 사정거리내 대상
 #   2) 1)중 체력이 가장 적은 대상
 #   3) 2)중 맵에 제일 먼저 나타난 대상
-# initMap (N:int, mMap:list)  N: map size, mMap: N x N map, 0:빈땅, 1:길, 2:Start, 3:End
+# initMap (N:int, mMap:list)  N: map size, mMap: N x N map, 0:빈땅, 1:road, 2:Start, 3:End
 # addTower(mRow:int, mCol:int, mInterval:int) mRow:설치할 타워 row좌표, mCol:설치할 타워 column좌표
 #                                             mInterval: 재장전 시간
 # runSimulation(M:int, mHP:int, mRetTs:list , mRetHP:list ) M:도망자 # (1<=M<300)
