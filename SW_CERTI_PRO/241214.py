@@ -16,6 +16,7 @@
 #                                                           mRetTs: 도망자들이 죽거나 탈출한 tun을 저장할 배열
 #                                                           mRetHP: 도망자들의 남아있는 체력
 # exit조건: 모든 도망자가 map에서 사라지거나(죽거나) 탈출했을 때
+
 from typing import List
 CMD_ADD = 200
 CMD_RUN = 300
