@@ -20,11 +20,17 @@
 from typing import List
 CMD_ADD = 200
 CMD_RUN = 300
+mMaps = []
 def initMap (N:int, mMap:list)-> None:
+    global mMaps
+    mMaps=mMap
     pass
 
-def addTower(mRow:int, mCol:int, mInterval:int) -> None:
-    pass
+def addTower(mRow:int, mCol:int, mInterval:int):    
+    mMaps[mRow][mCol]=mInterval
+    return
 
 def runSimulation(M:int, mHP:int, mRetTs:list , mRetHP:list ) -> None:
+    if all(mRetHP)==True or all(mRetHP)==True:
+        return
     pass
