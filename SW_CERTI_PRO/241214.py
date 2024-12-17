@@ -18,9 +18,14 @@
 # exit조건: 모든 도망자가 map에서 사라지거나(죽거나) 탈출했을 때
 
 from typing import List
+from collections import deque
 CMD_ADD = 200
 CMD_RUN = 300
 mMaps = []
+def bfs(x,y):
+    queue = deque()
+    
+    return
 def initMap (N:int, mMap:list)-> None:
     global mMaps
     mMaps=mMap
