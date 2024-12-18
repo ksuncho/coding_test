@@ -22,13 +22,18 @@ from collections import deque
 CMD_ADD = 200
 CMD_RUN = 300
 mMaps = []
+road = []
 def bfs(x,y):
     queue = deque()
     
     return
 def initMap (N:int, mMap:list)-> None:
-    global mMaps
+    global mMaps,road
     mMaps=mMap
+    for i in range(N):
+        for j in range(N):
+            if mMaps[i][j]==1:
+                road.append(((i,j)))
     pass
 
 def addTower(mRow:int, mCol:int, mInterval:int):    
