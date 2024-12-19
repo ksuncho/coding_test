@@ -23,8 +23,12 @@ CMD_ADD = 200
 CMD_RUN = 300
 mMaps = []
 road = []
-def bfs(x,y):
+def bfs(x,y,visited):
     queue = deque()
+    if mMaps[x][y]==1:
+        visited[x][y]=1
+    while True:
+        queue.append((x,y))
     
     return
 def initMap (N:int, mMap:list)-> None:
