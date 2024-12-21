@@ -23,6 +23,7 @@ CMD_ADD = 200
 CMD_RUN = 300
 mMaps = []
 road = []
+visited = [[0]*N for _ in range(N)]
 dx=[1,-1,0,0]
 dy=[0,0,1,-1]
 def bfs(x,y,visited):
