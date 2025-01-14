@@ -10,18 +10,24 @@ for ts in range(T):
     B = list(map(int,input().split()))
     A.sort()
     B.sort()
+    print(A)
+    print(B)
     ptrb = 0
     cnt = 0
     for ptra in range(len(A)):
         if A[ptra] <= B[ptrb]:
             continue
         else:
+            print(ptra,ptrb,A[ptra],B[ptrb],cnt)
             cnt += ptrb
         for j in range(ptrb,len(B)):
+            #print(ptra,j,A[ptra],B[j],cnt)
             if A[ptra] <= B[j]:
                 ptrb = j
-                continue
+                break
             else:
+                print(ptra,j,A[ptra],B[j],cnt)
                 cnt +=1
+        ptrb = j            
         
     print(cnt)
