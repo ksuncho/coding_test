@@ -75,6 +75,7 @@ def run():
             ret = addRectTile(mid, mData)
             ans = int(next(input_iter))
             if ret != ans:
+                print(f'ret:{ret}, ans:{ans}')
                 okay = False
         elif cmd == CMD_REMOVE:
             id = int(next(input_iter))
