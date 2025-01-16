@@ -15,45 +15,31 @@ if len(SA) > len(SB):
     TAR = SA
     SOR = SB
 DB = dict()
-cnts = dict()
-cntt = dict()
+flag = 0
 
-for word in string.ascii_lowercase:
-    cntt[word]=0
-#for k in range(len(SOR),-1,-1):
-#cnt = [0]*26
-for k in range(2,1,-1):
-    print(k)
-    for word in string.ascii_lowercase:
-        cnts[word]=0
-    for i in range(len(SOR)):
-        if len(SOR)-k-i < 0:
-            break
+for k in range(len(SOR),-1,-1):
+    for i in range(len(SOR)-k+1):
+        # if len(SOR)-k-i < 0:
+        #     break
+        cnt = [0]*125
         template = SOR[i:k+i]        
         for word in template:
-            cnts[word] += 1
-        freqs = tuple(cnts.values())
+            cnt[ord(word)] += 1
+        freqs = tuple(cnt[97:123])
         if freqs not in DB:
-            DB[freqs] = 1        
-    print(cnts)
-
-    flag = 0
-    for word in string.ascii_lowercase:
-        cntt[word]=0
-    for j in range(len(TAR)):
-        if len(TAR)-k-j < 0:
-            break
+            DB[freqs] = 1
+        
+    for j in range(len(TAR)-k+1):
+        # if len(TAR)-k-j < 0:
+        #     break
+        cnt = [0]*125
         key = TAR[j:k+j]        
         for word in key:
-            cntt[word] += 1
-        freqt = tuple(cntt.values())
+            cnt[ord(word)] += 1
+        freqt = tuple(cnt[97:123])
         if freqt in DB:
-            flag = 1
-            print(f'{k} break!!!!')
+            flag = 1          
             break            
     if flag:
-         break      
-
-#print(SOR)
-#print(k)
-#print(DB)
+        print(k)
+        break
