@@ -35,8 +35,8 @@ def addRectTile(mID : int,  mTile:List[List[int]]) -> int:
                     wallmap[i][j]=mID
                     if i+1 < len(wallmap): wallmap[i+1][j]=mID
                     if j+1 < len(wallmap[0]): wallmap[i][j+1]=mID
-                    if i-1 > 0: wallmap[i-1][j]=mID
-                    if j-1 > 0: wallmap[i][j-1]=mID
+                    if i-1 >= 0: wallmap[i-1][j]=mID
+                    if j-1 >= 0: wallmap[i][j-1]=mID
                     if i%2: ans = i*10000+(j*2+1)
                     else: ans = i*10000+(j*2)
                     print(f'matched!! i:{i} j:{j} k:{k}')
