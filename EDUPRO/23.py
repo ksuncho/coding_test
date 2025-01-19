@@ -1,6 +1,6 @@
 ## main.py
 import sys
-from solution import init, addBacteria, getMinLifeSpan, getCount
+from solution23 import init, addBacteria, getMinLifeSpan, getCount
 
 CMD_INIT = 0
 CMD_ADD = 1
@@ -41,7 +41,7 @@ def run():
             ans = int(next(input_iter))
             ret = getCount(mTime, mMinSpan, mMaxSpan)
             if ret != ans:
-                #print(f'mTime:{mTime},{mMinSpan}, {mMaxSpan},ret:{ret}, ans:{ans}')
+                print(f'mTime:{mTime}, {mMinSpan}, {mMaxSpan}, ret:{ret}, ans:{ans}')
                 okay = False
         else:
             okay = False
@@ -49,7 +49,7 @@ def run():
 
 
 if __name__ == '__main__':
-    sys.stdin = open('sample_input23.txt', 'r')
+    sys.stdin = open('C:/Users/User/momo/python/coding_test/EDUPRO/sample_input23.txt', 'r')
     input = sys.stdin.readline
 
     T, MARK = map(int, input().split())
