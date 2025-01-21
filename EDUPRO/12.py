@@ -17,28 +17,34 @@ if len(SA) > len(SB):
 DB = set()
 flag = 0
 
-cnt = [0]*26
+cnts = [0]*26
+cntt = [0]*26
 for word in SOR:
-    cnt[ord(word)-ord('a')] += 1
+    cnts[ord(word)-ord('a')] += 1
+
+for word in TAR:
+    cntt[ord(word)-ord('a')] += 1
 
 for k in range(len(SOR),-1,-1):
-    for i in range(len(SOR)-k+1):
-        cnt[ord(SOR[i-k])-ord('a')] -= 1
-        freqs = tuple(cnt)
-        if freqs not in DB:
-            DB.add(freqs)
+    for i in range(k-len(SOR),-1):
+        #cnts[ord(SOR[i])-ord('a')] -= 1
+        print(f'first i:{SOR[i]}')
+    for i in range(len(SOR)-k):
+        #cnts[ord(SOR[i])-ord('a')] -= 1
+        print(f'second i:{SOR[i]}')
+    freqs = tuple(cnts)
+    if freqs not in DB:
+        DB.add(freqs)
         
-    for j in range(len(TAR)-k+1):
-        # if len(TAR)-k-j < 0:
-        #     break
-        cnt = [0]*26
-        key = TAR[j:k+j]        
-        for word in key:
-            cnt[ord(word)-ord('a')] += 1
-        freqt = tuple(cnt)
-        if freqt in DB:
-            flag = 1          
-            break            
+    for j in range(k-len(TAR),-1):      
+        print(f'first j:{TAR[j]}')
+        #if j > 0: cntt[ord(TAR[j])-ord('a')] -= 1
+    for j in range(len(TAR)-k):
+        print(f'second j:{TAR[j]}')
+    freqt = tuple(cntt)
+    if freqt in DB:
+        flag = 1          
+        break            
     if flag:
         print(k)
         break
