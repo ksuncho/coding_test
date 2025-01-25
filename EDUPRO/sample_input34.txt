@@ -1,4 +1,4 @@
-25 100
+1 100
 7
 100 CMD_INIT
  number_of_station: 20  number_of_train: 3
