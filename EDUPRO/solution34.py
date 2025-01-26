@@ -56,24 +56,29 @@ def calculate(sId, eId):
         if sId >= start and sId <= end and (sId-start)%interval==0: strain.append(tId)
         if eId >= start and eId <= end and (eId-start)%interval==0: etrain.append(tId)
     #print(sId, eId, strain ,etrain)
-    visited = set()
-    que = deque()
 
-    #res = 0
+
+    res = []
     for i in strain:
         if i in etrain: return 0
+        visited = set()
+        que = deque()
         que.append((0,i))
         visited.add(i)
 
         while que:
             (cost, tid) = que.popleft()        
             if tid not in trainlist: continue            
-            if tid in etrain: return cost
+            if tid in etrain:
+                res.append(cost)
+                break
             for i in graph[tid]:
                 if i in visited: continue
                 que.append((cost+1,i))
                 visited.add(i)
             #print(que)        
+    for i in res:
+        return min(res)
     return -1
             
 #    return res
