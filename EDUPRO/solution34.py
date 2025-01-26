@@ -37,7 +37,7 @@ def add(mId, sId, eId, mInterval):
                 graph[tId].append(mId)
                 break
     #     print(MAP[tinfo])
-    # print(graph)
+    print(graph)
     return
 
 
@@ -47,15 +47,17 @@ def remove(mId):
 
 def bfs():
     while que:
-            (cost, tid) = que.popleft()
-            if tid in etrain: return cost
-            if tid not in trainlist: continue
-            for i in graph[tid]:
-                que.append((cost+1,i))
-                #visited[] = 1
+        (cost, tid) = que.popleft()
+        if tid in etrain: return cost
+        if tid not in trainlist: continue
+        if tid in visited: continue   
+        for i in graph[tid]:            
+            que.append((cost+1,i))
+            visited.add(i)
     return -1
 
 def calculate(sId, eId):
+    global visited, strain, etrain, que, Vcnt
     strain = []
     etrain = []
     for tinfo in MAP:
@@ -63,10 +65,15 @@ def calculate(sId, eId):
         if sId >= start and sId <= end and (sId-start)%interval: strain.append(tId)
         if eId >= start and eId <= end and (eId-start)%interval: etrain.append(tId)
 
-    visited = dict()
+    visited = set()
     que = deque()
+
+    res = 0
     for i in strain:
         que.append((0,i))
-        res = min(res, bfs())
+        visited.add(i)
+        print(i,etrain,bfs())
+        #res = min(res, bfs())
+        #print(res)
             
     return res
