@@ -60,6 +60,7 @@ def run():
 			ans = int(sys.stdin.readline().split()[1])
 			ret = calculate(sId, eId)
 			if ans != ret:
+				print(f'sId={sId},eId={eId}||ret={ret},ans={ans}')
 				okay = False
 		else:
 			okay = False

@@ -8,7 +8,6 @@ def init(n, k, mId, sId, eId, mInterval):
     graph = defaultdict(list)
     MAP = dict()
     trainlist = set()
-    Vcnt = 0
     for i in range(K):
         MAP[mId[i]]=(mId[i], sId[i], eId[i], mInterval[i])
         trainlist.add(mId[i])
@@ -31,13 +30,13 @@ def add(mId, sId, eId, mInterval):
     for tinfo in MAP:
         tId , start, end, interval = MAP[tinfo][0], MAP[tinfo][1], MAP[tinfo][2], MAP[tinfo][3]
         if mId == tId:continue
-        for k in range(start, end+1, interval):
+        for k in range(sId, eId+1, mInterval):
             if k >= start and k <= end and (k-start)%interval == 0:
                 graph[mId].append(tId)
                 graph[tId].append(mId)
                 break
-    #     print(MAP[tinfo])
-    print(graph)
+        #print(MAP[tinfo])
+    #print(graph)
     return
 
 
@@ -45,35 +44,36 @@ def remove(mId):
     trainlist.remove(mId)
     return
 
-def bfs():
-    while que:
-        (cost, tid) = que.popleft()
-        if tid in etrain: return cost
-        if tid not in trainlist: continue
-        if tid in visited: continue   
-        for i in graph[tid]:            
-            que.append((cost+1,i))
-            visited.add(i)
-    return -1
+# def bfs():
+
 
 def calculate(sId, eId):
-    global visited, strain, etrain, que, Vcnt
+    global visited, strain, etrain, que
     strain = []
     etrain = []
     for tinfo in MAP:
         tId , start, end, interval = MAP[tinfo][0], MAP[tinfo][1], MAP[tinfo][2], MAP[tinfo][3]
-        if sId >= start and sId <= end and (sId-start)%interval: strain.append(tId)
-        if eId >= start and eId <= end and (eId-start)%interval: etrain.append(tId)
-
+        if sId >= start and sId <= end and (sId-start)%interval==0: strain.append(tId)
+        if eId >= start and eId <= end and (eId-start)%interval==0: etrain.append(tId)
+    #print(sId, eId, strain ,etrain)
     visited = set()
     que = deque()
 
-    res = 0
+    #res = 0
     for i in strain:
+        if i in etrain: return 0
         que.append((0,i))
         visited.add(i)
-        print(i,etrain,bfs())
-        #res = min(res, bfs())
-        #print(res)
+
+        while que:
+            (cost, tid) = que.popleft()        
+            if tid not in trainlist: continue            
+            if tid in etrain: return cost
+            for i in graph[tid]:
+                if i in visited: continue
+                que.append((cost+1,i))
+                visited.add(i)
+            #print(que)        
+    return -1
             
-    return res
+#    return res
