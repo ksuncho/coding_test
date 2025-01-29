@@ -2,7 +2,7 @@ import sys
 if sys.platform == 'win32':
     sys.stdin = open('C:/Users/User/momo/python/coding_test/EDUPRO/17.txt')
 from collections import defaultdict
-from heapq import heappop, heappush
+from heapq import heappush
 input = sys.stdin.readline
 
 def eval(sid,pid,score):
@@ -11,49 +11,47 @@ def eval(sid,pid,score):
     pid = int(pid)
     score = int(score)    
     scorelist[sid][pid]=score
-    #print(pid,len(scorelist[sid]))
-    #avgval[pid] = 0
-    #sumval[pid] += score
-    for ppid in (1,m+1):
+    for ppid in range(1,m+1):
         cnt = 0
-        for ssid in (1,n+1):
+        for ssid in range(1,n+1):
             sscore = scorelist[ssid][ppid]
+            if sid in removelist: continue
             if sscore < 1: continue
             cnt += 1         
             sumval[ppid] += sscore
-        avgval[ppid] = int(sumval[ppid]/cnt+0.5)
-    #print(pid, sumval[pid])
+        if cnt == 0: avgval[ppid] = 0
+        else: avgval[ppid] = int(sumval[ppid]/cnt+0.5)
+    #print(pid, scorelist[0][0])
+    print(scorelist)
+    print(sumval)
+    print(avgval)
     pass
 
 def clear(sid):
     removelist.append(sid)
     pass
 
-def update(sid,pid,score):
-
-    pass
-
 def sumq(flag):
     sumpq = []
-    print(scorelist)
-    for sid in scorelist:
-        if sid in removelist: continue
-        # if int(flag) == 1:               
-        #     heappush(sumpq, (sumval[scorelist[sid][1]],scorelist[sid][0]))   
-        # else: heappush(sumpq, (-sumval[scorelist[sid][1]],-scorelist[sid][0]))  
-        print(scorelist[sid][1],sumval)
-    #print(abs(sumpq[0][0]))        
+    for pid in range(1,m+1):
+        if int(flag) == 1:               
+            heappush(sumpq, (sumval[pid],pid))   
+        else: heappush(sumpq, (-sumval[pid],-pid))  
+    print(abs(sumpq[0][0]))        
     pass
 
 def avgq(flag):
     avgpq = []
+    for pid in range(1,m+1):
+        if int(flag) == 1:               
+            heappush(avgpq, (avgval[pid],pid))   
+        else: heappush(avgpq, (-avgval[pid],-pid))  
+    print(abs(avgpq[0][0]))        
     pass
 
 n, m = map(int, input().split())
 q = int(input())
-#scorelist = defaultdict(list)
 scorelist = [[0] * (m+1) for _ in range(n+1)]
-#sumval = [[0] for _ in range(m+1)]
 sumval = [0] * (m+1)
 avgval = [0] * (m+1)
 removelist = []
