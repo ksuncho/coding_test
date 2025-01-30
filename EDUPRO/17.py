@@ -11,8 +11,11 @@ def eval(sid,pid,score):
     pid = int(pid)
     score = int(score)    
     scorelist[sid][pid]=score
+
     for ppid in range(1,m+1):
         cnt = 0
+        sumval[ppid] = 0
+        avgval[ppid] = 0
         for ssid in range(1,n+1):
             sscore = scorelist[ssid][ppid]
             if sid in removelist: continue
@@ -22,31 +25,42 @@ def eval(sid,pid,score):
         if cnt == 0: avgval[ppid] = 0
         else: avgval[ppid] = int(sumval[ppid]/cnt+0.5)
     #print(pid, scorelist[0][0])
-    print(scorelist)
-    print(sumval)
-    print(avgval)
+    # print(scorelist)
+    # print(sumval)
+    # print(avgval)
     pass
 
 def clear(sid):
+    sid = int(sid)
     removelist.append(sid)
+    cnt = 0
+    for ppid in range(1,m+1):
+        sscore = scorelist[sid][ppid]
+        if sscore < 1: continue
+        cnt += 1
+        if sid in removelist: 
+            sumval[ppid] -= sscore
+            cnt -= 1
+        if cnt == 0: avgval[ppid] = 0
+        else: avgval[ppid] = int(sumval[ppid]/cnt+0.5)
     pass
 
 def sumq(flag):
     sumpq = []
     for pid in range(1,m+1):
         if int(flag) == 1:               
-            heappush(sumpq, (sumval[pid],pid))   
-        else: heappush(sumpq, (-sumval[pid],-pid))  
-    print(abs(sumpq[0][0]))        
+            heappush(sumpq, (-sumval[pid],-pid))
+        else: heappush(sumpq, (sumval[pid],pid))  
+    print(abs(sumpq[0][1]))        
     pass
 
 def avgq(flag):
     avgpq = []
     for pid in range(1,m+1):
         if int(flag) == 1:               
-            heappush(avgpq, (avgval[pid],pid))   
-        else: heappush(avgpq, (-avgval[pid],-pid))  
-    print(abs(avgpq[0][0]))        
+            heappush(avgpq, (-avgval[pid],-pid))
+        else: heappush(avgpq, (avgval[pid],pid))     
+    print(abs(avgpq[0][1]))        
     pass
 
 n, m = map(int, input().split())
