@@ -28,13 +28,18 @@ def eval(sid,pid,score):
         heappush(summinpq, (sumval[ppid],ppid))
         heappush(avgmaxpq, (-avgval[ppid],-ppid))
         heappush(avgminpq, (avgval[ppid],ppid)) 
-    #print(pid, scorelist[0][0])
-    # print(scorelist)
-    # print(sumval)
-    # print(avgval)
+    # print(pid, scorelist[0][0])
+    print(scorelist)
+    print(f'sumval={sumval}')
+    print(f'avgval={avgval}')
+    print(f'summaxpq={summaxpq}')
+    print(f'summinpq={summinpq}')
+    print(f'avgmaxpq={avgmaxpq}')
+    print(f'avgminpq={avgminpq}')
     pass
 
 def clear(sid):
+    global summaxpq, summinpq, avgmaxpq, avgminpq
     sid = int(sid)
     removelist.append(sid)
     cnt = 0
@@ -47,35 +52,38 @@ def clear(sid):
             cnt -= 1
         if cnt == 0: avgval[ppid] = 0
         else: avgval[ppid] = int(sumval[ppid]/cnt+0.5)
-        while summaxpq:
-            sumv, pid = heappop(summaxpq)
-            if pid == -ppid: 
-                heappush(summaxpq,(-sumval[ppid],-ppid))
-                break
-            else: heappush(summaxpq,(-sumv,-pid))
-        while summinpq:
-            sumv, pid = heappop(summinpq)
-            if pid == -ppid: 
-                heappush(summinpq, (sumval[ppid],ppid))
-                break
-            else: heappush(summinpq,(sumv,pid))
-        while avgmaxpq:
-            avgv, pid = heappop(avgmaxpq)
-            if pid == -ppid: 
-                heappush(avgmaxpq,(-avgval[ppid],-ppid))
-                break
-            else: heappush(avgmaxpq,(-avgv,-pid))
-        while avgminpq:
-            avgv, pid = heappop(avgminpq)
-            if pid == -ppid: 
-                heappush(avgminpq, (avgval[ppid],ppid))
-                break
-            else: heappush(avgminpq,(avgv,pid))
+        sumv, pid = heappop(summaxpq)
+        if pid == -ppid: 
+            heappush(summaxpq,(-sumval[ppid],-ppid))
+            break
+        else: heappush(summaxpq,(-sumv,-pid))
+        
+        sumv, pid = heappop(summinpq)
+        if pid == -ppid: 
+            heappush(summinpq, (sumval[ppid],ppid))
+            break
+        else: heappush(summinpq,(sumv,pid))
+        
+        avgv, pid = heappop(avgmaxpq)
+        if pid == -ppid: 
+            heappush(avgmaxpq,(-avgval[ppid],-ppid))
+            break
+        else: heappush(avgmaxpq,(-avgv,-pid))
+        
+        avgv, pid = heappop(avgminpq)
+        if pid == -ppid: 
+            heappush(avgminpq, (avgval[ppid],ppid))
+            break
+        else: heappush(avgminpq,(avgv,pid))
 
 def sumq(flag):
-    if int(flag) == 1:               
+    if int(flag) == 1:
+        sumv, pid = heappop(summaxpq)
+        if pid != summaxpq[0][1]: heappush(summaxpq,(sumv,pid))
         print(abs(summaxpq[0][1]))
-    else:   print(abs(summinpq[0][1]))        
+    else: 
+        if pid != summinpq[0][1]: heappush(summinpq,(sumv,pid))  
+        print(abs(summinpq[0][1]))        
 
 def avgq(flag):
     if int(flag) == 1:               
