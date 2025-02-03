@@ -29,13 +29,13 @@ def eval(sid,pid,score):
         heappush(avgmaxpq, (-avgval[ppid],-ppid))
         heappush(avgminpq, (avgval[ppid],ppid)) 
     # print(pid, scorelist[0][0])
-    print(scorelist)
-    print(f'sumval={sumval}')
-    print(f'avgval={avgval}')
-    print(f'summaxpq={summaxpq}')
-    print(f'summinpq={summinpq}')
-    print(f'avgmaxpq={avgmaxpq}')
-    print(f'avgminpq={avgminpq}')
+    # print(scorelist)
+    # print(f'sumval={sumval}')
+    # print(f'avgval={avgval}')
+    # print(f'summaxpq={summaxpq}')
+    # print(f'summinpq={summinpq}')
+    # print(f'avgmaxpq={avgmaxpq}')
+    # print(f'avgminpq={avgminpq}')
     pass
 
 def clear(sid):
@@ -78,17 +78,35 @@ def clear(sid):
 
 def sumq(flag):
     if int(flag) == 1:
-        sumv, pid = heappop(summaxpq)
-        if pid != summaxpq[0][1]: heappush(summaxpq,(sumv,pid))
-        print(abs(summaxpq[0][1]))
+        while summaxpq:
+            sumv, pid = heappop(summaxpq)
+            if sumval[-pid] == -sumv: 
+                heappush(summaxpq,(sumv,pid))
+                print(abs(summaxpq[0][1]))
+                break
     else: 
-        if pid != summinpq[0][1]: heappush(summinpq,(sumv,pid))  
-        print(abs(summinpq[0][1]))        
+        while summinpq:
+            sumv, pid = heappop(summinpq)
+            if sumval[pid] == sumv: 
+                heappush(summinpq,(sumv,pid)) 
+                print(abs(summinpq[0][1]))
+                break
 
 def avgq(flag):
-    if int(flag) == 1:               
-        print(abs(avgmaxpq[0][1]))
-    else:   print(abs(avgminpq[0][1]))   
+    if int(flag) == 1:
+        while avgmaxpq:
+            avgv, pid = heappop(avgmaxpq)
+            if avgval[-pid] == -avgv: 
+                heappush(avgmaxpq,(avgv,pid))         
+                print(abs(avgmaxpq[0][1]))
+                break
+    else:
+        while avgminpq:
+            avgv, pid = heappop(avgminpq)
+            if avgval[pid] == avgv: 
+                heappush(avgminpq,(avgv,pid))   
+                print(abs(avgminpq[0][1]))
+                break
 
 n, m = map(int, input().split())
 q = int(input())
