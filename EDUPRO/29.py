@@ -21,7 +21,20 @@ def bfs():
     visited[sr][sc]=1
     while queue:
         r, c, d = queue.popleft()
-        for i in range(12):
-            nr = r + dr[i]
-            nc = c + dc[i]
+        if d == 1:  # east
+            for i in range(1,4):
+                nr = r
+                nc = c + i
+        elif d == 2: # west
+            for i in range(1,4):
+                nr = r
+                nc = c - i
+        elif d == 3: # south
+            for i in range(1,4):
+                nr = r + i
+                nc = c
+        else: # north
+            for i in range(1,4):
+                nr = r - i
+                nc = c
 print(MAPS)
