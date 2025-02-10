@@ -16,6 +16,12 @@ er, ec, ed = map(int, input().split())
 queue = deque()
 visited = [[0]*N for _ in range(M)]
 
+def go(k):
+    pass
+
+def turn(dir):
+    pass
+
 def bfs():
     queue.append((sr,sc,sd))
     visited[sr][sc]=1
