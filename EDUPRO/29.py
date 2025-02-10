@@ -37,4 +37,10 @@ def bfs():
             for i in range(1,4):
                 nr = r - i
                 nc = c
+        if 0 < nc or nc >= N or 0 < nr or nr >= M: continue
+        if visited[nr][nc] == 1: continue
+        queue.append((nr,nc,sd))
+        visited[nr][nc]=1
 print(MAPS)
+
+
