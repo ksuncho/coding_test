@@ -17,7 +17,8 @@ queue = deque()
 visited = [[0]*N for _ in range(M)]
 
 def go(k):
-    pass
+    nr += k
+    return nr
 
 def turn(dir):
     ndir += dir
