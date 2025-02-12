@@ -20,7 +20,8 @@ def go(k):
     pass
 
 def turn(dir):
-    pass
+    ndir += dir
+    return ndir
 
 def bfs():
     cnt = 0
