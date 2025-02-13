@@ -16,12 +16,28 @@ er, ec, ed = map(int, input().split())
 queue = deque()
 visited = [[0]*N for _ in range(M)]
 
-def go(k):
-    nr += k
-    return nr
+def go(k, r, c, d):
+    global nc, nr
+    if d == 1:  # east
+        nr = r
+        nc = c + k
+    elif d == 2: # west
+        nr = r
+        nc = c - k
+    elif d == 3: # south
+        nr = r + k
+        nc = c
+    else: # north
+        nr = r - k
+        nc = c
+    return nr, nc
+
 
 def turn(dir):
+    global ndir
     ndir += dir
+    if ndir > 3: ndir = 0
+    if ndir < 0: ndir = 3
     return ndir
 
 def bfs():
@@ -30,22 +46,10 @@ def bfs():
     visited[sr][sc]=1
     while queue:
         r, c, d = queue.popleft()
-        if d == 1:  # east
-            for i in range(1,4):
-                nr = r
-                nc = c + i
-        elif d == 2: # west
-            for i in range(1,4):
-                nr = r
-                nc = c - i
-        elif d == 3: # south
-            for i in range(1,4):
-                nr = r + i
-                nc = c
-        else: # north
-            for i in range(1,4):
-                nr = r - i
-                nc = c
+        for k in range(1,4):
+            for d in [1,-1]:
+                ndir = turn(d)
+                nr, nc = go(k, r, c, ndir)
         cnt += 1
         if nr == er and nc == ec: return cnt
         if 0 < nc or nc >= N or 0 < nr or nr >= M: continue
