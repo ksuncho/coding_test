@@ -120,6 +120,7 @@ def Show(mHow, mValue):
     while pq:
         if cnt >= 5: break
         price, id = heappop(pq)
+        if id not in itemlist: continue
         if itemlist[id][2] == price:
             cnt +=1
             ids.append(id)
