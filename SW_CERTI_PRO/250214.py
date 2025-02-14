@@ -20,8 +20,12 @@
 # (mCategory, mCompany)를 key, [mID, mPrice] 를 value로 defaultdict itemlistcc
 # 모든 물품용 min heapq, 각 item별, 회사별, 10개의 min heapq 만들고, Sell이랑 Discount때 update
 # Discount하는 항목이 많아지면 속도가 너무 느려짐, time limit이 4초였는데, 18번까지 4초내로 나오고 TLE, 25개 tc에 대해서는 119초!
-# def RESULT(cnt, IDs):
-#     self
+class RESULT:
+    IDs = [0] * 5
+    def __init__(self, cnt, IDs):
+        self.cnt = cnt
+        self.IDs = IDs
+
 from collections import defaultdict
 from heapq import heappush, heappop
 
@@ -122,4 +126,4 @@ def Show(mHow, mValue):
             tmp.append((price,id))
     for i in tmp:
         heappush(pq, i)
-    return RETURN(cnt,ids)
+    return RESULT(cnt,ids)
