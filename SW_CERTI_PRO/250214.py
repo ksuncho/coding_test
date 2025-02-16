@@ -95,6 +95,7 @@ def Discount(mCategory, mCompany, mAmount):
             deletelist.append(id)
         else:
             itemlist[id][2] = newprice
+            update(id, mCategory, mCompany, newprice)
     for i in deletelist:
         Close(i)
     return
