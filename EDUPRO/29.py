@@ -15,6 +15,7 @@ sr, sc, sd = map(int, input().split())
 er, ec, ed = map(int, input().split())
 queue = deque()
 visited = [[0]*N for _ in range(M)]
+ndir = 0
 
 def go(k, r, c, d):
     global nc, nr
